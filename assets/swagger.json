@@ -1,0 +1,80 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Documentation API REST",
+      "version": "1.0.0",
+      "license": {
+        "name": "ISC"
+      },
+      "description": "API REST Pour gerer les membres de l'application"
+    },
+    "basePath": "/api/",
+    "host": "localhost:8080",
+    "paths": {
+      "/members": {
+        "post": {
+          "summary": "/members",
+          "responses": {},
+          "tags": ["members"]
+        },
+        "get": {
+          "summary": "/members",
+          "responses": {},
+          "tags": ["members"]
+        }
+      },
+      "/members/{id}": {
+        "get": {
+          "summary": "/members/{id}",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {},
+          "tags": ["members"]
+        },
+        "put": {
+          "summary": "/members/{id}",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {},
+          "tags": ["members"]
+        },
+        "delete": {
+          "summary": "/members/{id}",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {},
+          "tags": ["members"]
+        }
+      }
+    },
+    "tags" : [
+        {
+            "name": "members",
+            "description": "methodes permettant de gerer les utilisateurs"
+        }
+    ]
+  }

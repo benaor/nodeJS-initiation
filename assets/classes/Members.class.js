@@ -14,7 +14,7 @@ let Members = class {
             db.query('SELECT * FROM members WHERE id = ?', [id])
                 .then((result) => {
                     if (result[0] != undefined) next(result[0]);
-                    else next(new Error("Wrong id"))
+                    else next(new Error(config.errors.wrongID))
                 })
                 .catch((err) => next(err))
         })
@@ -28,7 +28,7 @@ let Members = class {
                     .then((result) => next(result))
                     .catch((err) => next(err))
             } else if (max != undefined) {
-                next(new Error("Wrong max value"))
+                next(new Error(config.errors.wrongMaxValue))
             } else {
                 db.query('SELECT * FROM members')
                     .then((result) => next(result))
@@ -44,7 +44,7 @@ let Members = class {
                 name = name.trim();
                 db.query('SELECT * FROM members WHERE name = ?', [name])
                     .then((result) => {
-                        if (result[0] != undefined) next(new Error("Name is already used"))
+                        if (result[0] != undefined) next(new Error(config.errors.nameAlreadyTaken))
                         else return db.query('INSERT INTO members (name) VALUE(?)', [name])
                     })
                     .then((result) => {
@@ -58,7 +58,7 @@ let Members = class {
                     })
                     .catch((err) => next(err))
             } else {
-                next(new Error("No name value"));
+                next(new Error(config.errors.noNameValue));
             }
         })
     }
@@ -71,16 +71,16 @@ let Members = class {
                 db.query('SELECT * FROM members WHERE id = ?', [id])
                     .then((result) => {
                         if (result[0] != undefined) return db.query('SELECT * FROM members WHERE name = ? AND id != ?', [name, id])
-                        else next(new Error("Aucun utilisateur ne porte cet ID"));
+                        else next(new Error(config.errors.wrongID));
                     })
                     .then((result) => {
-                        if (result[0] != undefined) next(new Error('Same Name'));
+                        if (result[0] != undefined) next(new Error(config.Errors.sameName));
                         else return db.query('UPDATE members SET name = ? WHERE id = ?', [name, id])
                     })
                     .then(() => next(true))
                     .catch((err) => next(new Error(err)))
             } else {
-                next(new Error("Wrong ID"));
+                next(new Error(config.errors.wrongID));
             }
         })
     }
@@ -90,7 +90,7 @@ let Members = class {
         db.query('SELECT * FROM members WHERE id = ?', [id])
             .then((result) => {
                 if (result[0] != undefined) return db.query('DELETE FROM members WHERE id = ?', [id])
-                else next(new Error("Wrong ID"));
+                else next(new Error(config.errors.wrongID));
             })
             .then(() => next(true))
             .catch((err) => next(new Error(err)))

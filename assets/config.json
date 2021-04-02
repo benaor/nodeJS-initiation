@@ -7,5 +7,12 @@
         "database": "nodejs",
         "user": "root",
         "password": "root"
+    },
+    "errors": {
+        "wrongID" : "mauvais ID",
+        "wrongMaxValue": "Mauvaise valeur maximale",
+        "nameAlreadyTaken": "Ce nom est déjà pris",
+        "noNameValue": "Le champ name est vide",
+        "sameName": "le nouveau nom est identique à l'ancien"
     }
 }

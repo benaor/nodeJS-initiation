@@ -1,13 +1,16 @@
 const express = require('express');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./assets/swagger.json');
 const bodyParser = require('body-parser');
 const morgan = require('morgan')('dev');
 const mysql = require('promise-mysql');
 const { error, success, checkAndChange } = require('./assets/function');
-const app = express();
 const config = require('./assets/config');
 
 mysql.createConnection(config.db).then((db) => {
     console.log("connected");
+
+    const app = express();
 
     //On créer notre route MembersRouteur
     let MembersRouter = express.Router()
@@ -16,6 +19,7 @@ mysql.createConnection(config.db).then((db) => {
     app.use(morgan); //For display error in console
     app.use(express.json()) // for parsing application/json
     app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+    app.use(config.rootAPI + 'api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
     // Fonction de base de l'API
     MembersRouter.route('/')
