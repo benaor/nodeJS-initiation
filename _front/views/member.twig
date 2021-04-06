@@ -10,13 +10,34 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <title>Erreur !</title>
+    <title>All members!</title>
 </head>
 
 <body class="p-5">
     <h1 class="mb-5 text-center">
-        Une erreur est survenue
+        page du membre {{ member.name }}
     </h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                {% for index, value in member %}
+                <th scope="row">
+                    {{ index }}
+                </th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {% for value in member %}
+                    <td>
+                        {{ value }}
+                    </td>
+                {% endfor %}
+            </tr>
+        </tbody>
+    </table>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
