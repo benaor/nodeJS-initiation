@@ -63,7 +63,23 @@ app.post("/members/:id/edit", (req, res) => {
 })
 
 // Suppression d'un membre
+app.post("/delete", (req, res) => {
+    apiCall("/members/" + req.body.id, 'delete', {}, res, () => {
+        res.redirect("/members")
+    })
+})
 
+// Ajouter un membre
+app.get("/insert", (req, res) => {
+    res.render("insert.twig")
+})
+app.post("/insert", (req, res) => {
+    apiCall("/members", 'post', {
+        name: req.body.name
+    }, res, () => {
+        res.redirect("/members")
+    })
+})
 
 //Lancement de l'application
 app.listen(port, () => console.log("started on port : " + port))
